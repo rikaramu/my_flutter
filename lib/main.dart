@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:my_flutter/myhome.dart';
 import 'package:my_flutter/myi18n.dart';
+import 'package:my_flutter/myriverpod.dart';
 import 'package:my_flutter/mytab.dart';
 
 void main() {
@@ -17,13 +19,12 @@ class MyApp extends StatelessWidget {
     return CupertinoApp(
       title: app_title,
       theme: CupertinoThemeData(
-        primaryColor: CupertinoColors.activeBlue,
+        primaryColor: CupertinoColors.systemIndigo,
         textTheme: CupertinoTextThemeData(
           textStyle: TextStyle(
             fontFamily: 'SourceSansPro',
-            fontSize: 32.0,
-            fontWeight: FontWeight.w700,
-            color: CupertinoColors.darkBackgroundGray,
+            fontSize: 20.0,
+            color: CupertinoColors.black,
           ),
           navLargeTitleTextStyle: TextStyle(
             fontSize: 48.0,
@@ -33,11 +34,12 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: MyHome(),
-      // home: I18N(),
       routes: <String, WidgetBuilder>{
         '/myhome': (BuildContext context) => MyHome(),
         '/mytab': (BuildContext context) => MyTab(),
         '/myi18n': (BuildContext context) => MyI18N(),
+        '/myriverpod': (BuildContext context) =>
+            ProviderScope(child: MyRiverpod()),
       },
     );
   }
