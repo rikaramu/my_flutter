@@ -54,6 +54,25 @@ class MyHome extends StatelessWidget {
                 );
               },
             ),
+            SizedBox(
+              height: 20.0,
+            ),
+            CupertinoButton(
+              color: CupertinoColors.systemGreen,
+              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 36.0),
+              child: Text(
+                'States',
+                style: TextStyle(
+                  fontSize: 24.0,
+                ),
+              ),
+              onPressed: () {
+                showCupertinoModalPopup(
+                  context: context,
+                  builder: (context) => _buildActionSheet3(context),
+                );
+              },
+            ),
           ],
         ),
       ),
@@ -116,6 +135,46 @@ class MyHome extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pop();
             Navigator.of(context).pushNamed('/myi18n');
+          },
+        ),
+      ],
+      cancelButton: CupertinoActionSheetAction(
+        child: Text('Cancel'),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
+    );
+  }
+
+  _buildActionSheet3(context) {
+    return CupertinoActionSheet(
+      title: Text(
+        'State Management',
+        style: TextStyle(
+          fontSize: 24.0,
+        ),
+      ),
+      message: Text(
+        'There are a lot of state management library',
+        style: TextStyle(
+          fontSize: 20.0,
+        ),
+      ),
+      actions: [
+        CupertinoActionSheetAction(
+          child: Text('provider'),
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed('/myprovider');
+          },
+          isDefaultAction: true,
+        ),
+        CupertinoActionSheetAction(
+          child: Text('riverpod'),
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed('/myriverpod');
           },
         ),
       ],

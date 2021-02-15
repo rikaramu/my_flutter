@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:my_flutter/myhome.dart';
 import 'package:my_flutter/myi18n.dart';
+import 'package:my_flutter/myprovider.dart';
 import 'package:my_flutter/myriverpod.dart';
 import 'package:my_flutter/mytab.dart';
 
@@ -36,10 +37,11 @@ class MyApp extends StatelessWidget {
       home: MyHome(),
       routes: <String, WidgetBuilder>{
         '/myhome': (BuildContext context) => MyHome(),
-        '/mytab': (BuildContext context) => MyTab(),
-        '/myi18n': (BuildContext context) => MyI18N(),
         '/myriverpod': (BuildContext context) =>
             ProviderScope(child: MyRiverpod()),
+        '/myprovider': (BuildContext context) => MyProvider(),
+        '/mytab': (BuildContext context) => MyTab(),
+        '/myi18n': (BuildContext context) => MyI18N(),
       },
     );
   }
