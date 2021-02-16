@@ -69,7 +69,7 @@ class MyHome extends StatelessWidget {
               onPressed: () {
                 showCupertinoModalPopup(
                   context: context,
-                  builder: (context) => _buildActionSheet3(context),
+                  builder: (context) => _buildASStates(context),
                 );
               },
             ),
@@ -147,7 +147,7 @@ class MyHome extends StatelessWidget {
     );
   }
 
-  _buildActionSheet3(context) {
+  _buildASStates(context) {
     return CupertinoActionSheet(
       title: Text(
         'State Management',
@@ -175,6 +175,20 @@ class MyHome extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pop();
             Navigator.of(context).pushNamed('/myriverpod');
+          },
+        ),
+        CupertinoActionSheetAction(
+          child: Text('BLoC'),
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed('/mybloc');
+          },
+        ),
+        CupertinoActionSheetAction(
+          child: Text('BLoC Weather App'),
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed('/myblocweatherapp');
           },
         ),
       ],

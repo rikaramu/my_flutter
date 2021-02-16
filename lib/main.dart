@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_flutter/blocs/weather/myblocweatherapp.dart';
+import 'package:my_flutter/mybloc.dart';
 
 import 'package:my_flutter/myhome.dart';
 import 'package:my_flutter/myi18n.dart';
@@ -37,9 +39,11 @@ class MyApp extends StatelessWidget {
       home: MyHome(),
       routes: <String, WidgetBuilder>{
         '/myhome': (BuildContext context) => MyHome(),
+                '/myprovider': (BuildContext context) => MyProvider(),
         '/myriverpod': (BuildContext context) =>
             ProviderScope(child: MyRiverpod()),
-        '/myprovider': (BuildContext context) => MyProvider(),
+        '/mybloc': (BuildContext context) => MyBLoC(),
+        '/myblocweatherapp': (BuildContext context) => MyBLoCWeatherApp(),        
         '/mytab': (BuildContext context) => MyTab(),
         '/myi18n': (BuildContext context) => MyI18N(),
       },
