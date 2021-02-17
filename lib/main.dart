@@ -1,13 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:my_flutter/blocs/weather/myblocweatherapp.dart';
-import 'package:my_flutter/mybloc.dart';
 
-import 'package:my_flutter/myhome.dart';
-import 'package:my_flutter/myi18n.dart';
-import 'package:my_flutter/myprovider.dart';
-import 'package:my_flutter/myriverpod.dart';
-import 'package:my_flutter/mytab.dart';
+import 'blocs/firebaselogin/myblocxfirebaselogin.dart';
+import 'blocs/login/myblocxlogin.dart';
+import 'fluttersamples/bloclibrary/myfsbloclibrary.dart';
+import 'myhome.dart';
+import 'myi18n.dart';
+import 'myprovider.dart';
+import 'myriverpod.dart';
+import 'mytab.dart';
+import 'mybloc.dart';
+import 'blocs/weather/mycubitweatherapp.dart';
+import 'blocs/weather/myblocweatherapp.dart';
+import 'riverpoddev/counter/myrpcounter.dart';
+import 'riverpoddev/todos/myrptodos.dart';
 
 void main() {
   runApp(MyApp());
@@ -39,13 +45,20 @@ class MyApp extends StatelessWidget {
       home: MyHome(),
       routes: <String, WidgetBuilder>{
         '/myhome': (BuildContext context) => MyHome(),
-                '/myprovider': (BuildContext context) => MyProvider(),
-        '/myriverpod': (BuildContext context) =>
-            ProviderScope(child: MyRiverpod()),
-        '/mybloc': (BuildContext context) => MyBLoC(),
-        '/myblocweatherapp': (BuildContext context) => MyBLoCWeatherApp(),        
         '/mytab': (BuildContext context) => MyTab(),
         '/myi18n': (BuildContext context) => MyI18N(),
+        '/mybloc': (BuildContext context) => MyBLoC(),
+        '/myprovider': (BuildContext context) => MyProvider(),
+        '/myriverpod': (BuildContext context) =>
+            ProviderScope(child: MyRiverpod()),
+        '/mycubitweatherapp': (BuildContext context) => MyCubitWeatherApp(),
+        '/myblocweatherapp': (BuildContext context) => MyBLoCWeatherApp(),
+        '/myblocxlogin': (BuildContext context) => MyBLoCXLogin(),
+        '/myblocxfirebaselogin': (BuildContext context) =>
+            MyBLoCXFirebaseLogin(),
+        '/myfsbloclibrary': (BuildContext context) => MyFSBlocLibrary(),
+        '/myrpcounter': (BuildContext context) => MyRPCounter(),
+        '/myrptodos': (BuildContext context) => MyRPTodos(),
       },
     );
   }

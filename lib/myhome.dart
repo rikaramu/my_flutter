@@ -16,9 +16,7 @@ class MyHome extends StatelessWidget {
                 fontSize: 32.0,
               ),
             ),
-            SizedBox(
-              height: 20.0,
-            ),
+            SizedBox(height: 20.0),
             CupertinoButton(
               color: CupertinoColors.systemRed,
               padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 36.0),
@@ -35,9 +33,7 @@ class MyHome extends StatelessWidget {
                 );
               },
             ),
-            SizedBox(
-              height: 20.0,
-            ),
+            SizedBox(height: 20.0),
             CupertinoButton(
               color: CupertinoColors.systemYellow,
               padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 36.0),
@@ -54,9 +50,7 @@ class MyHome extends StatelessWidget {
                 );
               },
             ),
-            SizedBox(
-              height: 20.0,
-            ),
+            SizedBox(height: 20.0),
             CupertinoButton(
               color: CupertinoColors.systemGreen,
               padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 36.0),
@@ -70,6 +64,53 @@ class MyHome extends StatelessWidget {
                 showCupertinoModalPopup(
                   context: context,
                   builder: (context) => _buildASStates(context),
+                );
+              },
+            ),
+            SizedBox(height: 20.0),
+            CupertinoButton(
+              color: CupertinoColors.systemGreen,
+              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 36.0),
+              child: Text(
+                'BLoC examples',
+                style: TextStyle(
+                  fontSize: 24.0,
+                ),
+              ),
+              onPressed: () {
+                showCupertinoModalPopup(
+                  context: context,
+                  builder: (context) => _buildASBlocExamples(context),
+                );
+              },
+            ),
+            SizedBox(height: 20.0),
+            CupertinoButton(
+              color: CupertinoColors.systemGreen,
+              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 36.0),
+              child: Text(
+                'fluttersamples.com',
+                style: TextStyle(fontSize: 24.0),
+              ),
+              onPressed: () {
+                showCupertinoModalPopup(
+                  context: context,
+                  builder: (context) => _buildASfluttersamples(context),
+                );
+              },
+            ),
+            SizedBox(height: 20.0),
+            CupertinoButton(
+              color: CupertinoColors.systemIndigo,
+              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 36.0),
+              child: Text(
+                'riverpod.dev',
+                style: TextStyle(fontSize: 24.0),
+              ),
+              onPressed: () {
+                showCupertinoModalPopup(
+                  context: context,
+                  builder: (context) => _buildASriverpod(context),
                 );
               },
             ),
@@ -178,10 +219,18 @@ class MyHome extends StatelessWidget {
           },
         ),
         CupertinoActionSheetAction(
-          child: Text('BLoC'),
+          child:
+              Text('BLoC (not done yet, find way to update text/title/word)'),
           onPressed: () {
             Navigator.of(context).pop();
             Navigator.of(context).pushNamed('/mybloc');
+          },
+        ),
+        CupertinoActionSheetAction(
+          child: Text('Cubit Weather App'),
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed('/mycubitweatherapp');
           },
         ),
         CupertinoActionSheetAction(
@@ -189,6 +238,83 @@ class MyHome extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pop();
             Navigator.of(context).pushNamed('/myblocweatherapp');
+          },
+        ),
+      ],
+      cancelButton: CupertinoActionSheetAction(
+        child: Text('Cancel'),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
+    );
+  }
+
+  _buildASBlocExamples(context) {
+    return CupertinoActionSheet(
+      title: Text('BLoC examples', style: TextStyle(fontSize: 24.0)),
+      actions: [
+        CupertinoActionSheetAction(
+          child: Text('Login'),
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed('/myblocxlogin');
+          },
+        ),
+        CupertinoActionSheetAction(
+          child: Text('Firebase Login'),
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed('/myblocxfirebaselogin');
+          },
+        ),
+      ],
+      cancelButton: CupertinoActionSheetAction(
+        child: Text('Cancel'),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
+    );
+  }
+
+  _buildASfluttersamples(context) {
+    return CupertinoActionSheet(
+      title: Text('fluttersamples.com', style: TextStyle(fontSize: 24.0)),
+      actions: [
+        CupertinoActionSheetAction(
+          child: Text('bloclibrary'),
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed('/myfsbloclibrary');
+          },
+        ),
+      ],
+      cancelButton: CupertinoActionSheetAction(
+        child: Text('Cancel'),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
+    );
+  }
+
+  _buildASriverpod(context) {
+    return CupertinoActionSheet(
+      title: Text('riverpod.dev', style: TextStyle(fontSize: 24.0)),
+      actions: [
+        CupertinoActionSheetAction(
+          child: Text('counter'),
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed('/myrpcounter');
+          },
+        ),
+        CupertinoActionSheetAction(
+          child: Text('todos'),
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed('/myrptodos');
           },
         ),
       ],

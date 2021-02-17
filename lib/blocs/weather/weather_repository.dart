@@ -12,7 +12,7 @@ class FakeWeatherRepository implements WeatherRepository {
   Future<Weather> fetchWeather(String cityName) {
     // Simulate network delay
     return Future.delayed(
-      Duration(seconds: 1),
+      Duration(seconds: 3),
       () {
         final random = Random();
 

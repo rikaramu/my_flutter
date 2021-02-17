@@ -1,22 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'bloc/bloc_weather.dart';
+import 'cubit/cubit_weather.dart';
 import 'model/weather.dart';
 import 'weather_repository.dart';
 
-class MyBLoCWeatherApp extends StatelessWidget {
+class MyCubitWeatherApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => BlocWeather(FakeWeatherRepository()),
+      create: (context) => CubitWeather(FakeWeatherRepository()),
       child: CupertinoPageScaffold(
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 16),
           alignment: Alignment.center,
-          child: BlocConsumer<BlocWeather, BlocWeatherState>(
+          child: BlocConsumer<CubitWeather, CubitWeatherState>(
             listener: (context, state) {
-              if (state is BlocWeatherError) {
+              if (state is CubitWeatherError) {
                 showCupertinoModalPopup(
                   context: context,
                   builder: (context) => CupertinoActionSheet(
@@ -26,11 +26,11 @@ class MyBLoCWeatherApp extends StatelessWidget {
               }
             },
             builder: (context, state) {
-              if (state is BlocWeatherInitial) {
+              if (state is CubitWeatherInitial) {
                 return buildInitialInput();
-              } else if (state is BlocWeatherLoading) {
+              } else if (state is CubitWeatherLoading) {
                 return buildLoading();
-              } else if (state is BlocWeatherLoaded) {
+              } else if (state is CubitWeatherLoaded) {
                 return buildColumnWithData(state.weather);
               } else {
                 // (state is WeatherError)
@@ -105,9 +105,13 @@ class CityInputField extends StatelessWidget {
   }
 
   void submitCityName(BuildContext context, String cityName) {
-    // ignore: close_sinks
-    final weatherBloc = BlocProvider.of<BlocWeather>(context);
-    weatherBloc.add(GetWeather(cityName));
+    final weatherCubit = BlocProvider.of<CubitWeather>(context);
+    weatherCubit.getWeather(cityName);
   }
+
+  // void submitCityName(BuildContext context, String cityName) {
+  //   final weatherBloc = BlocProvider.of<WeatherBloc>(context);
+  //   weatherBloc.add(GetWeather(cityName));
+  // }
 
 }
