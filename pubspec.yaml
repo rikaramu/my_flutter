@@ -19,6 +19,13 @@ dependencies:
   provider: ^4.3.3
   bloc: ^6.1.1
   flutter_bloc: ^6.1.2
+  meta: ^1.2.4
+  uuid: ^2.2.2
+  equatable: ^1.2.6
+  authentication_repository:
+    path: lib/blocs/login/packages/authentication_repository
+  user_repository:
+    path: lib/blocs/login/packages/user_repository
 
 dev_dependencies:
   flutter_test:
