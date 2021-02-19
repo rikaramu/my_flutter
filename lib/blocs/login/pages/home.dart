@@ -1,34 +1,32 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../authentication/authentication.dart';
 
-class Home extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    debugPrint('MyBLoCXLogin.Home.build');
+    debugPrint('MyBLoCXLogin.HomePage.build');
     return CupertinoPageScaffold(
       child: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Spacer(flex: 10),
-            Text('https://bloclibrary.dev/#/flutterlogintutorial'),
-            Spacer(flex: 1),
-            CupertinoButton(
-              child: Text('push'),
-              onPressed: () {
-                debugPrint('push');
-                Navigator.of(context).pushNamed('/splash');
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Builder(
+              builder: (context) {
+                final userId = context.select(
+                  (AuthenticationBloc bloc) => bloc.state.user.id,
+                );
+                return Text('UserID: $userId');
               },
             ),
             CupertinoButton(
-              child: Text('pop'),
+              child: const Text('Logout'),
               onPressed: () {
-                debugPrint('pop');
-                Navigator.of(context).maybePop();
+                context
+                    .read<AuthenticationBloc>()
+                    .add(AuthenticationLogoutRequested());
               },
             ),
-            Text(
-                'https://github.com/felangel/bloc/tree/master/examples/flutter_login'),
-            Spacer(flex: 10),
           ],
         ),
       ),

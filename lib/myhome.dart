@@ -69,7 +69,7 @@ class MyHome extends StatelessWidget {
             ),
             SizedBox(height: 20.0),
             CupertinoButton(
-              color: CupertinoColors.systemGreen,
+              color: CupertinoColors.systemBlue,
               padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 36.0),
               child: Text(
                 'BLoC examples',

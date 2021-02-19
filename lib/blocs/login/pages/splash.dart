@@ -6,7 +6,9 @@ class Splash extends StatelessWidget {
     debugPrint('MyBLoCXLogin.Splash.build');
     return const CupertinoPageScaffold(
       child: Center(
-        child: CupertinoActivityIndicator(),
+        child: CupertinoActivityIndicator(
+          radius: 28.0,
+        ),
       ),
     );
   }

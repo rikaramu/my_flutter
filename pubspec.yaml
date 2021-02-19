@@ -26,6 +26,7 @@ dependencies:
     path: lib/blocs/login/packages/authentication_repository
   user_repository:
     path: lib/blocs/login/packages/user_repository
+  formz: ^0.3.2
 
 dev_dependencies:
   flutter_test:

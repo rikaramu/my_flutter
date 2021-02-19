@@ -6,7 +6,7 @@ import 'package:user_repository/user_repository.dart';
 
 import 'authentication/bloc/authentication_bloc.dart';
 import 'pages/home.dart';
-import 'pages/login.dart';
+import 'pages/login/login.dart';
 import 'pages/splash.dart';
 
 class MyBLoCXLogin extends StatelessWidget {
@@ -17,9 +17,9 @@ class MyBLoCXLogin extends StatelessWidget {
   _buildNavigator() {
     var routes = <String, WidgetBuilder>{
       '/': (BuildContext context) => _buildMyBlocXLoginApp(context),
-      '/home': (BuildContext context) => Home(),
+      '/home': (BuildContext context) => HomePage(),
       '/splash': (BuildContext context) => Splash(),
-      '/login': (BuildContext context) => Login(),
+      '/login': (BuildContext context) => LoginPage(),
     };
     return Navigator(
       initialRoute: '/',
@@ -38,30 +38,32 @@ class MyBLoCXLogin extends StatelessWidget {
 
   _buildMyBlocXLoginApp(context) {
     debugPrint('MyBLoCXLogin.__buildMyBlocXLoginApp');
-    return RepositoryProvider.value(
-      value: authenticationRepository,
-      child: BlocProvider(
-        create: (_) => AuthenticationBloc(
+    return BlocProvider(
+      create: (_) {
+        debugPrint('MyBLoCXLogin.__buildMyBlocXLoginApp.BlocProvider.create');
+        return AuthenticationBloc(
           authenticationRepository: authenticationRepository,
           userRepository: userRepository,
-        ),
-        child: BlocListener<AuthenticationBloc, AuthenticationState>(
-          listener: (context, state) {
-            switch (state.status) {
-              case AuthenticationStatus.authenticated:
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/home', ModalRoute.withName('/home'));
-                break;
-              case AuthenticationStatus.unauthenticated:
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/login', ModalRoute.withName('/login'));
-                break;
-              default:
-                break;
-            }
-          },
-          child: Splash(),
-        ),
+        );
+      },
+      child: BlocListener<AuthenticationBloc, AuthenticationState>(
+        listener: (context, state) {
+          debugPrint(
+              'MyBLoCXLogin.__buildMyBlocXLoginApp.BlocProvider.listen ${state.status}');
+          switch (state.status) {
+            case AuthenticationStatus.authenticated:
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/home', ModalRoute.withName('/home'));
+              break;
+            case AuthenticationStatus.unauthenticated:
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/login', ModalRoute.withName('/login'));
+              break;
+            default:
+              break;
+          }
+        },
+        child: Splash(),
       ),
     );
   }
@@ -69,6 +71,9 @@ class MyBLoCXLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     debugPrint('MyBLoCXLogin.build');
-    return _buildNavigator();
+    return RepositoryProvider.value(
+      value: authenticationRepository,
+      child: _buildNavigator(),
+    );
   }
 }
