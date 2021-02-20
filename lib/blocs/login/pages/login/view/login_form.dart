@@ -9,7 +9,7 @@ class LoginForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
-        debugPrint('LoginForm.build.BlocListener.listener');
+        debugPrint('LoginForm.build.BlocListener.listener state:${state.props}');
         if (state.status.isSubmissionFailure) {
           // Scaffold.of(context)
           //   ..hideCurrentSnackBar()

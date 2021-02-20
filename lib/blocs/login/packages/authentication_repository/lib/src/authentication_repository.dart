@@ -8,6 +8,7 @@ class AuthenticationRepository {
   final _controller = StreamController<AuthenticationStatus>();
 
   Stream<AuthenticationStatus> get status async* {
+    print('AuthenticationRepository.get.status');
     await Future<void>.delayed(const Duration(seconds: 3));
     yield AuthenticationStatus.unauthenticated;
     yield* _controller.stream;
@@ -19,16 +20,24 @@ class AuthenticationRepository {
   }) async {
     assert(username != null);
     assert(password != null);
-
+    print('AuthenticationRepository.logIn ${_controller.isClosed}');
     await Future.delayed(
       const Duration(milliseconds: 300),
-      () => !_controller.isClosed ? _controller.add(AuthenticationStatus.authenticated) : null,
+      () {
+        return !_controller.isClosed
+            ? _controller.add(AuthenticationStatus.authenticated)
+            : null;
+      },
     );
   }
 
   void logOut() {
+    print('AuthenticationRepository.logOut');
     _controller.add(AuthenticationStatus.unauthenticated);
   }
 
-  void dispose() => _controller.close();
+  void dispose() {
+    print('AuthenticationRepository.dispose');
+    _controller.close();
+  }
 }

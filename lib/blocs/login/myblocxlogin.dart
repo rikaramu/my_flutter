@@ -9,10 +9,14 @@ import 'pages/home.dart';
 import 'pages/login/login.dart';
 import 'pages/splash.dart';
 
+final AuthenticationRepository authenticationRepository =
+    AuthenticationRepository();
+final UserRepository userRepository = UserRepository();
+
 class MyBLoCXLogin extends StatelessWidget {
-  final AuthenticationRepository authenticationRepository =
-      AuthenticationRepository();
-  final UserRepository userRepository = UserRepository();
+  // final AuthenticationRepository authenticationRepository =
+  //     AuthenticationRepository();
+  // final UserRepository userRepository = UserRepository();
 
   _buildNavigator() {
     var routes = <String, WidgetBuilder>{
