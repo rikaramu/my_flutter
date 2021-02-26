@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
             MyBLoCXFirebaseLogin(),
         '/myfsbloclibrary': (BuildContext context) => MyFSBlocLibrary(),
         '/myrpcounter': (BuildContext context) => MyRPCounter(),
-        '/myrptodos': (BuildContext context) => MyRPTodos(),
+        '/myrptodos': (BuildContext context) => MyRPTodosScope(),
       },
     );
   }

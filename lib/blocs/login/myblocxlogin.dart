@@ -9,16 +9,14 @@ import 'pages/home.dart';
 import 'pages/login/login.dart';
 import 'pages/splash.dart';
 
-final AuthenticationRepository authenticationRepository =
-    AuthenticationRepository();
-final UserRepository userRepository = UserRepository();
+// First try, for ref
+class MyBLoCXLoginFirstTry extends StatelessWidget {
+  final AuthenticationRepository authenticationRepository =
+      AuthenticationRepository();
+  final UserRepository userRepository = UserRepository();
 
-class MyBLoCXLogin extends StatelessWidget {
-  // final AuthenticationRepository authenticationRepository =
-  //     AuthenticationRepository();
-  // final UserRepository userRepository = UserRepository();
-
-  _buildNavigator() {
+  _buildNavigator(context) {
+    debugPrint('MyBLoCXLogin._buildNavigator');
     var routes = <String, WidgetBuilder>{
       '/': (BuildContext context) => _buildMyBlocXLoginApp(context),
       '/home': (BuildContext context) => HomePage(),
@@ -28,6 +26,7 @@ class MyBLoCXLogin extends StatelessWidget {
     return Navigator(
       initialRoute: '/',
       onGenerateRoute: (RouteSettings settings) {
+        debugPrint('MyBLoCXLogin._buildNavigator.onGenerateRoute');
         var builder = routes[settings.name];
         if (builder != null) {
           return CupertinoPageRoute(
@@ -41,10 +40,10 @@ class MyBLoCXLogin extends StatelessWidget {
   }
 
   _buildMyBlocXLoginApp(context) {
-    debugPrint('MyBLoCXLogin.__buildMyBlocXLoginApp');
+    debugPrint('MyBLoCXLogin._buildMyBlocXLoginApp');
     return BlocProvider(
       create: (_) {
-        debugPrint('MyBLoCXLogin.__buildMyBlocXLoginApp.BlocProvider.create');
+        debugPrint('MyBLoCXLogin._buildMyBlocXLoginApp.BlocProvider.create');
         return AuthenticationBloc(
           authenticationRepository: authenticationRepository,
           userRepository: userRepository,
@@ -56,12 +55,14 @@ class MyBLoCXLogin extends StatelessWidget {
               'MyBLoCXLogin.__buildMyBlocXLoginApp.BlocProvider.listen ${state.status}');
           switch (state.status) {
             case AuthenticationStatus.authenticated:
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  '/home', ModalRoute.withName('/home'));
+              // Navigator.of(context).pushNamedAndRemoveUntil(
+              //     '/home', ModalRoute.withName('/home'));
+              Navigator.of(context).pushNamed('/home');
               break;
             case AuthenticationStatus.unauthenticated:
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  '/login', ModalRoute.withName('/login'));
+              // Navigator.of(context).pushNamedAndRemoveUntil(
+              //     '/login', ModalRoute.withName('/login'));
+              Navigator.of(context).pushNamed('/login');
               break;
             default:
               break;
@@ -77,7 +78,49 @@ class MyBLoCXLogin extends StatelessWidget {
     debugPrint('MyBLoCXLogin.build');
     return RepositoryProvider.value(
       value: authenticationRepository,
-      child: _buildNavigator(),
+      child: _buildNavigator(context),
+    );
+  }
+}
+
+class MyBLoCXLogin extends StatelessWidget {
+  final AuthenticationRepository authenticationRepository =
+      AuthenticationRepository();
+  final UserRepository userRepository = UserRepository();
+
+  final routes = <String, WidgetBuilder>{
+    '/': (BuildContext context) => Splash(),
+    '/home': (BuildContext context) => HomePage(),
+    '/login': (BuildContext context) => LoginPage(),
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    debugPrint('MyBLoCXLogin.build');
+    return RepositoryProvider.value(
+      value: authenticationRepository,
+      child: BlocProvider(
+        create: (_) {
+          debugPrint('MyBLoCXLogin.build.BlocProvider.create');
+          return AuthenticationBloc(
+            authenticationRepository: authenticationRepository,
+            userRepository: userRepository,
+          );
+        },
+        child: Navigator(
+          onGenerateRoute: (RouteSettings settings) {
+            debugPrint('MyBLoCXLogin.build.BlocProvider.Navigator.onGenerateRoute');
+            var builder = routes[settings.name];
+            if (builder != null) {
+              return CupertinoPageRoute(
+                settings: settings,
+                builder: builder,
+              );
+            }
+            return null;
+          },
+        ),
+      ),
     );
   }
 }

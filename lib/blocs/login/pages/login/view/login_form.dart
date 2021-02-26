@@ -7,15 +7,11 @@ import '../bloc/login_bloc.dart';
 class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    debugPrint('MyBLoCXLogin.LoginForm.build');
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
         debugPrint('LoginForm.build.BlocListener.listener state:${state.props}');
         if (state.status.isSubmissionFailure) {
-          // Scaffold.of(context)
-          //   ..hideCurrentSnackBar()
-          //   ..showSnackBar(
-          //     const SnackBar(content: Text('Authentication Failure')),
-          //   );
           debugPrint('LoginForm.build.BlocListener.listener/state.status.isSubmissionFailure');
         }
       },
@@ -33,6 +29,7 @@ class LoginForm extends StatelessWidget {
         ),
       ),
     );
+
   }
 }
 

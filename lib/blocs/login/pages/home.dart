@@ -13,9 +13,10 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             Builder(
               builder: (context) {
-                final userId = context.select(
+                var userId = context.select(
                   (AuthenticationBloc bloc) => bloc.state.user.id,
                 );
+                // userId = '0';
                 return Text('UserID: $userId');
               },
             ),
