@@ -92,6 +92,7 @@ class MyRPTodos extends HookWidget {
         FocusScope.of(context).unfocus();
       },
       child: CupertinoPageScaffold(
+        resizeToAvoidBottomInset: false,
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
           children: [

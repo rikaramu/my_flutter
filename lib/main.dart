@@ -13,6 +13,7 @@ import 'mybloc.dart';
 import 'blocs/weather/mycubitweatherapp.dart';
 import 'blocs/weather/myblocweatherapp.dart';
 import 'riverpoddev/counter/myrpcounter.dart';
+import 'riverpoddev/marvel/myrpmarvel.dart';
 import 'riverpoddev/todos/myrptodos.dart';
 
 void main() {
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
         '/myfsbloclibrary': (BuildContext context) => MyFSBlocLibrary(),
         '/myrpcounter': (BuildContext context) => MyRPCounter(),
         '/myrptodos': (BuildContext context) => MyRPTodosScope(),
+        '/myrpmarvel': (BuildContext context) => MyRPMarvel(),
       },
     );
   }

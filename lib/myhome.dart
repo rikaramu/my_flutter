@@ -6,6 +6,7 @@ class MyHome extends StatelessWidget {
   Widget build(BuildContext context) {
     debugPrint('MyHome.build');
     return CupertinoPageScaffold(
+      resizeToAvoidBottomInset: false, //expect to not call build method when keyboard up/down
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -315,6 +316,13 @@ class MyHome extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pop();
             Navigator.of(context).pushNamed('/myrptodos');
+          },
+        ),
+        CupertinoActionSheetAction(
+          child: Text('marvel'),
+          onPressed: () {
+            Navigator.of(context).pop();
+            Navigator.of(context).pushNamed('/myrpmarvel');
           },
         ),
       ],
