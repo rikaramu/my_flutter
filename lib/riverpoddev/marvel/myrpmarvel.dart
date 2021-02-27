@@ -24,14 +24,12 @@ class MyRPMarvel extends StatelessWidget {
       //     ),
       //   ),
       // ],
-      child: Scaffold(
-        body: MyRPMarvelHome(),
-      ),
+      child: MyRPMarvelNav(),
     );
   }
 }
 
-class MyRPMarvelHome extends StatelessWidget {
+class MyRPMarvelNav extends HookWidget {
   final routes = <String, WidgetBuilder>{
     '/': (BuildContext context) => Container(),
     // '/character': (c) => const CharacterView(),
@@ -40,16 +38,16 @@ class MyRPMarvelHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('MyRPMarvelHome.build');
+    debugPrint('MyRPMarvelNav.build');
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
-        debugPrint('MyRPMarvelHome.build.GestureDetector.onTap');
+        debugPrint('MyRPMarvelNav.build.GestureDetector.onTap');
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Navigator(
         onGenerateRoute: (RouteSettings settings) {
-          debugPrint('MyRPMarvelHome.build#Navigator.onGenerateRoute');
+          debugPrint('MyRPMarvelNav.build#Navigator.onGenerateRoute');
           if (settings.name == null) return null;
           if (settings.name == '/')
             return MaterialPageRoute<void>(
