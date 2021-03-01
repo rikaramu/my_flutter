@@ -31,6 +31,7 @@ dependencies:
   hooks_riverpod: ^0.12.4
   flutter_portal: ^0.3.0
   freezed_annotation: ^0.12.0
+  flutter_svg: ^0.18.1
 
 dev_dependencies:
   flutter_test:
@@ -39,7 +40,7 @@ dev_dependencies:
   freezed: ^0.12.7
 
 flutter:
-  uses-material-design: false
+  uses-material-design: true
 
   fonts:
   - family: SourceSansPro
@@ -53,3 +54,7 @@ flutter:
     fonts:
       - asset: assets/fonts/Source_Sans_Pro/SourceSansPro-Light.ttf
         weight: 300
+  assets:
+    - assets/marvel/configurations.json
+    - assets/marvel/marvel.svg
+    - assets/marvel/marvel_background.jpeg

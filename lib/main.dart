@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'blocs/firebaselogin/myblocxfirebaselogin.dart';
 import 'blocs/login/myblocxlogin.dart';
 import 'fluttersamples/bloclibrary/myfsbloclibrary.dart';
+import 'myapplifecycle.dart';
 import 'myhome.dart';
 import 'myi18n.dart';
 import 'myprovider.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
       home: MyHome(),
       routes: <String, WidgetBuilder>{
         '/myhome': (BuildContext context) => MyHome(),
+        '/myapplifecycle': (BuildContext context) => MyAppLifecycle(),
         '/mytab': (BuildContext context) => MyTab(),
         '/myi18n': (BuildContext context) => MyI18N(),
         '/mybloc': (BuildContext context) => MyBLoC(),

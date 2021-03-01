@@ -137,10 +137,10 @@ class MyHome extends StatelessWidget {
       ),
       actions: [
         CupertinoActionSheetAction(
-          child: Text('riverpod'),
+          child: Text('app lifecycle'),
           onPressed: () {
             Navigator.of(context).pop();
-            Navigator.of(context).pushNamed('/myriverpod');
+            Navigator.of(context).pushNamed('/myapplifecycle');
           },
           isDefaultAction: true,
         ),

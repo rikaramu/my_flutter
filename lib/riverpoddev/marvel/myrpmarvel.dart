@@ -7,10 +7,6 @@ import 'package:flutter_portal/flutter_portal.dart';
 
 import 'screens/home.dart';
 
-//user rikara301437671
-//public key 735e43d36f3e4c1db05ec7c9cfa7081d
-//private key 025bcbc21aa97401d67cd54e82e38d8903f8e9fc
-
 class MyRPMarvel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -24,7 +20,10 @@ class MyRPMarvel extends StatelessWidget {
       //     ),
       //   ),
       // ],
-      child: MyRPMarvelNav(),
+      child: MaterialApp(
+        theme: ThemeData(primarySwatch: Colors.red),
+        home: MyRPMarvelNav(),
+      ),
     );
   }
 }
