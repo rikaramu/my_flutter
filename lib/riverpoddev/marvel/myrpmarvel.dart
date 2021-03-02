@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 
+import 'screens/character_detail.dart';
 import 'screens/home.dart';
 
 class MyRPMarvel extends StatelessWidget {
@@ -31,8 +32,7 @@ class MyRPMarvel extends StatelessWidget {
 class MyRPMarvelNav extends HookWidget {
   final routes = <String, WidgetBuilder>{
     '/': (BuildContext context) => Container(),
-    // '/character': (c) => const CharacterView(),
-    '/character': (c) => Container(),
+    '/character': (c) => const CharacterView(),
   };
 
   @override
@@ -57,10 +57,9 @@ class MyRPMarvelNav extends HookWidget {
           if (settings.name.startsWith('/characters/') && split.length == 3) {
             result = ProviderScope(
               overrides: [
-                // selectedCharacterId.overrideWithValue(split.last),
+                selectedCharacterId.overrideWithValue(split.last),
               ],
-              // child: const CharacterView(),
-              child: Container(),
+              child: const CharacterView(),
             );
           }
           if (result == null)

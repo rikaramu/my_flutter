@@ -1,55 +1,18 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/cupertino.dart'; //for icon
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../marvel.dart';
 import '../widgets/search_bar.dart';
 import '../widgets/marvel_logo.dart';
+import '../widgets/loading_image.dart';
 
 part 'home.freezed.dart';
 
 const kCharactersPageLimit = 50;
-
-@freezed
-abstract class CharacterPagination with _$CharacterPagination {
-  factory CharacterPagination({
-    @required int page,
-    String name,
-  }) = _CharacterPagination;
-}
-
-// // workaround to https://github.com/dart-lang/sdk/issues/41449
-// final $family = FutureProvider.autoDispose.family;
-// final characterPages =
-//     $family<MarvelListCharactersReponse, CharacterPagination>(
-//   (ref, meta) async {
-//     // Cancel the page request if the UI no-longer needs it before the request
-//     // is finished.
-//     // This typically happen if the user scrolls very fast
-//     final cancelToken = CancelToken();
-//     ref.onDispose(cancelToken.cancel);
-
-//     final repository = ref.read(repositoryProvider);
-//     final charactersResponse = await repository.fetchCharacters(
-//       offset: meta.page * kCharactersPageLimit,
-//       limit: kCharactersPageLimit,
-//       nameStartsWith: meta.name,
-//       cancelToken: cancelToken,
-//     );
-
-//     // Once a page was downloaded, preserve its state to avoid re-downloading it again.
-//     ref.maintainState = true;
-//     return charactersResponse;
-//   },
-// );
-
-final charactersCount =
-    Provider.autoDispose.family<AsyncValue<int>, String>((ref, name) {
-  debugPrint('home.dart#charactersCount');
-  // final meta = CharacterPagination(page: 0, name: name);
-  // return ref.watch(characterPages(meta)).whenData((value) => value.totalCount);
-  return AsyncValue.data(10);
-});
 
 class Home extends HookWidget {
   @override
@@ -106,8 +69,7 @@ class Home extends HookWidget {
                       overrides: [
                         _characterIndex.overrideWithValue(index),
                       ],
-                      // child: const CharacterItem(),
-                      child: Text('temp'),
+                      child: const CharacterItem(),
                     );
                   }),
                 ),
@@ -128,6 +90,49 @@ class Home extends HookWidget {
   }
 }
 
+final _characterIndex = ScopedProvider<int>(null);
+
+final charactersCount =
+    Provider.autoDispose.family<AsyncValue<int>, String>((ref, name) {
+  debugPrint('home.dart#charactersCount');
+  final meta = CharacterPagination(page: 0, name: name);
+  return ref.watch(characterPages(meta)).whenData((value) => value.totalCount);
+  // return AsyncValue.data(10);
+});
+
+@freezed
+abstract class CharacterPagination with _$CharacterPagination {
+  factory CharacterPagination({
+    @required int page,
+    String name,
+  }) = _CharacterPagination;
+}
+
+// workaround to https://github.com/dart-lang/sdk/issues/41449
+final $family = FutureProvider.autoDispose.family;
+final characterPages =
+    $family<MarvelListCharactersReponse, CharacterPagination>(
+  (ref, meta) async {
+    // Cancel the page request if the UI no-longer needs it before the request
+    // is finished.
+    // This typically happen if the user scrolls very fast
+    final cancelToken = CancelToken();
+    ref.onDispose(cancelToken.cancel);
+
+    final repository = ref.read(repositoryProvider);
+    final charactersResponse = await repository.fetchCharacters(
+      offset: meta.page * kCharactersPageLimit,
+      limit: kCharactersPageLimit,
+      nameStartsWith: meta.name,
+      cancelToken: cancelToken,
+    );
+
+    // Once a page was downloaded, preserve its state to avoid re-downloading it again.
+    ref.maintainState = true;
+    return charactersResponse;
+  },
+);
+
 @freezed
 abstract class CharacterOffset with _$CharacterOffset {
   factory CharacterOffset({
@@ -136,7 +141,7 @@ abstract class CharacterOffset with _$CharacterOffset {
   }) = _CharacterOffset;
 }
 
-final _characterIndex = ScopedProvider<int>(null);
+
 
 final characterAtIndex = Provider.autoDispose
     .family<AsyncValue<Character>, CharacterOffset>((ref, query) {

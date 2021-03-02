@@ -162,34 +162,33 @@ class _SearchHints extends HookWidget {
           itemCount: count,
           separatorBuilder: (context, _) => const Divider(height: 0),
           itemBuilder: (context, index) {
-            return Text('aa');
-            // return HookBuilder(
-            //   builder: (context) {
-            //     final character = useProvider(characterAtIndex(
-            //       CharacterOffset(offset: index, name: search),
-            //     ));
+            return HookBuilder(
+              builder: (context) {
+                final character = useProvider(characterAtIndex(
+                  CharacterOffset(offset: index, name: search),
+                ));
 
-            //     return character.when(
-            //       loading: () {
-            //         return const Center(child: CircularProgressIndicator());
-            //       },
-            //       error: (err, stack) => const Center(child: Text('Error')),
-            //       data: (character) {
-            //         return ListTile(
-            //           visualDensity: VisualDensity.compact,
-            //           onTap: () {
-            //             Navigator.pushNamed(
-            //                 context, '/characters/${character.id}');
-            //           },
-            //           title: Text(
-            //             character.name,
-            //             style: Theme.of(context).textTheme.bodyText2,
-            //           ),
-            //         );
-            //       },
-            //     );
-            //   },
-            // );
+                return character.when(
+                  loading: () {
+                    return const Center(child: CircularProgressIndicator());
+                  },
+                  error: (err, stack) => const Center(child: Text('Error')),
+                  data: (character) {
+                    return ListTile(
+                      visualDensity: VisualDensity.compact,
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, '/characters/${character.id}');
+                      },
+                      title: Text(
+                        character.name,
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                    );
+                  },
+                );
+              },
+            );
 
           },
         );
